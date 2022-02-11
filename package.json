@@ -1,6 +1,6 @@
 {
-    "name": "@widen/axe-html-reporter",
-    "version": "0.0.2",
+    "name": "axe-reporter-html",
+    "version": "0.0.1",
     "description": "The module that allows you to create HTML Report from raw accessibility aXe result object",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -38,7 +38,7 @@
     },
     "publishConfig": {
         "access": "public",
-        "registry": "http://registry.npmjs.org"
+        "registry": "https://registry.npmjs.org"
     },
     "peerDependencies": {
         "axe-core": ">=3"
