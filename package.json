@@ -44,9 +44,17 @@
         "axe-core": ">=3"
     },
     "devDependencies": {
+        "@babel/core": "^7.17.7",
+        "@babel/eslint-parser": "^7.17.0",
         "@types/jest": "^25.2.3",
         "@types/mustache": "^4.0.1",
         "@types/node": "^14.11.8",
+        "@typescript-eslint/eslint-plugin": "^5.15.0",
+        "@typescript-eslint/parser": "^5.15.0",
+        "eslint": "^8.11.0",
+        "eslint-config-widen": "^0.5.0",
+        "eslint-plugin-sort": "^2.4.0",
+        "eslint-plugin-widen": "^0.1.1",
         "jest": "^26.5.3",
         "prettier": "^2.1.2",
         "ts-jest": "^26.4.1",
@@ -55,5 +63,6 @@
     "dependencies": {
         "mustache": "^4.0.1",
         "rimraf": "^3.0.2"
-    }
+    },
+    "packageManager": "yarn@3.2.0"
 }

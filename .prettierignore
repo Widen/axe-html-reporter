@@ -1,0 +1,10 @@
+# Yarn auto-generated files
+.yarn/
+.yarnrc.yml
+
+# Changelogs are managed by changesets
+CHANGELOG.md
+
+# Misc
+lib/
+test-results/
