@@ -10,7 +10,7 @@ declare global {
 }
 
 export const test = base.extend<
-  { run: (content: string) => Promise<Buffer> },
+  { run: (content: string) => Promise<void> },
   { axe: string }
 >({
   axe: [
@@ -36,12 +36,11 @@ export const test = base.extend<
       const results = await page.evaluate(() => window.axe.run())
       const html = await createHTMLReport(results)
 
-      // TEMP
+      // TEmp
       await fs.writeFile('report.html', html)
 
       // Update the page content to the HTML report and take a screenshot
       await page.setContent(html)
-      return page.screenshot()
     })
   },
 })
