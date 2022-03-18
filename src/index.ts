@@ -2,8 +2,7 @@ import { AxeResults } from 'axe-core'
 import ejs from 'ejs'
 import fs from 'fs/promises'
 import path from 'path'
-import { icons, plural } from './utils'
-import { getWCAGTags } from './utils/tags'
+import { getWCAGTags, icons, plural } from './utils'
 
 function prepareResults({ inapplicable, passes, violations }: AxeResults) {
   return {
@@ -18,7 +17,8 @@ function prepareResults({ inapplicable, passes, violations }: AxeResults) {
     plural,
     violations: violations.map((check) => ({
       ...check,
-      icon: icons[check.impact ?? 'moderate'],
+      icon: icons[check.impact ?? 'n/a'],
+      impact: check.impact ?? 'n/a',
       tags: getWCAGTags(check.tags),
     })),
   }

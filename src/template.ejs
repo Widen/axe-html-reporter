@@ -30,6 +30,24 @@
         align-items: center;
       }
 
+      .node-list {
+        display: flex;
+        gap: 8px;
+      }
+
+      .node-list pre {
+        width: 100%;
+      }
+
+      dt,
+      dd {
+        display: inline;
+      }
+
+      dd {
+        margin-left: 8px;
+      }
+
       table {
         table-layout: auto;
       }
@@ -53,14 +71,41 @@
           plural(violations.length, 'violation') %>.
         </p>
 
-        <% for(const violation of violations) {%>
+        <% for(const check of violations) {%>
         <details>
           <summary>
             <span class="card-title">
-              <%- violation.icon %> <%= violation.description %>
+              <%- check.icon %> <%= check.help %>
             </span>
           </summary>
-          hi
+
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 8px;
+            "
+          >
+            <p style="margin: 0"><%= check.description %></p>
+            <a target="_blank" href="<%= check.helpUrl %>">Learn more</a>
+          </div>
+
+          <ul>
+            <li>Rule: <code><%= check.id %></code></li>
+            <li>Impact: <code><%= check.impact %></code></li>
+            <li>Tags: <%= check.tags %></li>
+          </ul>
+
+          <p style="margin: 0">
+            <b><%= check.nodes.length %></b> <%= plural(check.nodes.length,
+            'node') %> triggered this violation.
+          </p>
+
+          <div class="node-list">
+            <% for (const node of check.nodes) { %>
+            <pre><code><%= node.html %></code></pre>
+            <% } %>
+          </div>
         </details>
         <% } %>
       </div>
@@ -81,14 +126,14 @@
               <th>Description</th>
               <th>Rule</th>
               <th>Tags</th>
-              <th>Node count</th>
+              <th>Nodes</th>
             </tr>
           </thead>
 
           <tbody>
             <% for(const check of passes) { %>
             <tr>
-              <td><%= check.description %></td>
+              <td><%= check.help %></td>
               <td><code><%= check.id %></code></td>
               <td><%= check.tags %></td>
               <td><%= check.nodes.length %></td>
@@ -117,7 +162,7 @@
           <tbody>
             <% for(const check of inapplicable) { %>
             <tr>
-              <td><%= check.description %></td>
+              <td><%= check.help %></td>
               <td><code><%= check.id %></code></td>
               <td><%= check.tags %></td>
             </tr>

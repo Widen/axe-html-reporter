@@ -21,7 +21,7 @@ test.describe('HTML reporter', () => {
     expect(await page.screenshot()).toMatchSnapshot()
   })
 
-  test('with errors', async ({ page, run }) => {
+  test.only('with errors', async ({ page, run }) => {
     await run('<div>hello</div>')
     await page.locator('summary').first().click()
     expect(await page.screenshot()).toMatchSnapshot()
