@@ -1,72 +1,72 @@
-import mustache from 'mustache';
-import { AxeResults, Result } from 'axe-core';
-import { loadTemplate } from './util/loadTemplate';
-import { prepareReportData } from './util/prepareReportData';
-import { prepareAxeRules } from './util/prepareAxeRules';
-import { saveHtmlReport } from './util/saveHtmlReport';
+import { AxeResults, Result } from 'axe-core'
+import mustache from 'mustache'
+import { loadTemplate } from './util/loadTemplate'
+import { prepareAxeRules } from './util/prepareAxeRules'
+import { prepareReportData } from './util/prepareReportData'
+import { saveHtmlReport } from './util/saveHtmlReport'
 
 export interface Options {
-    reportFileName?: string;
-    outputDir?: string;
-    projectKey?: string;
-    customSummary?: string;
-    outputDirPath?: string;
-    doNotCreateReportFile?: boolean;
+  customSummary?: string
+  doNotCreateReportFile?: boolean
+  outputDir?: string
+  outputDirPath?: string
+  projectKey?: string
+  reportFileName?: string
 }
 
 export interface CreateReport {
-    results: Partial<AxeResults>;
-    options?: Options;
+  options?: Options
+  results: Partial<AxeResults>
 }
 
 export interface PreparedResults {
-    violations: Result[];
-    passes?: Result[];
-    incomplete?: Result[];
-    inapplicable?: Result[];
+  inapplicable?: Result[]
+  incomplete?: Result[]
+  passes?: Result[]
+  violations: Result[]
 }
 
-export function createHtmlReport({ results, options }: CreateReport): string {
-    if (!results.violations) {
-        throw new Error(
-            "'violations' is required for HTML accessibility report. Example: createHtmlReport({ results : { violations: Result[] } })"
-        );
-    }
-    const template = loadTemplate();
-    const preparedReportData = prepareReportData({
-        violations: results.violations,
-        passes: results.passes,
-        incomplete: results.incomplete,
-        inapplicable: results.inapplicable,
-    });
-    const htmlContent = mustache.render(template, {
-        url: results.url,
-        violationsSummary: preparedReportData.violationsSummary,
-        violations: preparedReportData.violationsSummaryTable,
-        violationDetails: preparedReportData.violationsDetails,
-        checksPassed: preparedReportData.checksPassed,
-        checksIncomplete: preparedReportData.checksIncomplete,
-        checksInapplicable: preparedReportData.checksInapplicable,
-        hasPassed: Boolean(results.passes),
-        hasIncomplete: Boolean(results.incomplete),
-        hasInapplicable: Boolean(results.inapplicable),
-        incompleteTotal: preparedReportData.checksIncomplete
-            ? preparedReportData.checksIncomplete.length
-            : 0,
-        projectKey: options?.projectKey,
-        customSummary: options?.customSummary,
-        hasAxeRawResults: Boolean(results?.timestamp),
-        rules: prepareAxeRules(results?.toolOptions?.rules || {}),
-    });
+export function createHtmlReport({ options, results }: CreateReport): string {
+  if (!results.violations) {
+    throw new Error(
+      "'violations' is required for HTML accessibility report. Example: createHtmlReport({ results : { violations: Result[] } })"
+    )
+  }
+  const template = loadTemplate()
+  const preparedReportData = prepareReportData({
+    inapplicable: results.inapplicable,
+    incomplete: results.incomplete,
+    passes: results.passes,
+    violations: results.violations,
+  })
+  const htmlContent = mustache.render(template, {
+    checksInapplicable: preparedReportData.checksInapplicable,
+    checksIncomplete: preparedReportData.checksIncomplete,
+    checksPassed: preparedReportData.checksPassed,
+    customSummary: options?.customSummary,
+    hasAxeRawResults: Boolean(results?.timestamp),
+    hasInapplicable: Boolean(results.inapplicable),
+    hasIncomplete: Boolean(results.incomplete),
+    hasPassed: Boolean(results.passes),
+    incompleteTotal: preparedReportData.checksIncomplete
+      ? preparedReportData.checksIncomplete.length
+      : 0,
+    projectKey: options?.projectKey,
+    rules: prepareAxeRules(results?.toolOptions?.rules || {}),
+    url: results.url,
+    violationDetails: preparedReportData.violationsDetails,
+    violations: preparedReportData.violationsSummaryTable,
+    violationsSummary: preparedReportData.violationsSummary,
+  })
 
-    if (!options?.doNotCreateReportFile) {
-        saveHtmlReport({
-            htmlContent,
-            reportFileName: options?.reportFileName,
-            outputDir: options?.outputDir,
-            outputDirPath: options?.outputDirPath,
-        });
-    }
+  if (!options?.doNotCreateReportFile) {
+    saveHtmlReport({
+      htmlContent,
+      outputDir: options?.outputDir,
+      outputDirPath: options?.outputDirPath,
+      reportFileName: options?.reportFileName,
+    })
+  }
 
-    return htmlContent;
+  return htmlContent
 }
