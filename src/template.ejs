@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axe Accessibility Report</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
+    />
+
+    <style>
+      body {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+
+      summary:hover,
+      summary:focus {
+        text-decoration: none;
+      }
+
+      .card-title {
+        display: inline-flex;
+        vertical-align: middle;
+        margin-left: 8px;
+        gap: 8px;
+        align-items: center;
+      }
+
+      table {
+        table-layout: auto;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Axe Accessibility Report</h1>
+
+      <h2>Violations</h2>
+      <% if (violations.length) { %>
+      <div>
+        <p>
+          Axe found <b><%= violations.length %></b> <%=
+          plural(violations.length, 'violation') %>.
+        </p>
+
+        <% for(const violation of violations) {%>
+        <details>
+          <summary>
+            <span class="card-title">
+              <%- violation.icon %> <%= violation.description %>
+            </span>
+          </summary>
+          hi
+        </details>
+        <% } %>
+      </div>
+      <% } else { %>
+      <p></p>
+      <% } %>
+
+      <h2>Passed checks</h2>
+      <details>
+        <summary>
+          Axe found <b><%= passes.length %></b> passing <%=
+          plural(passes.length, 'check') %>.
+        </summary>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Rule</th>
+              <th>Tags</th>
+              <th>Node count</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% for(const check of passes) { %>
+            <tr>
+              <td><%= check.description %></td>
+              <td><code><%= check.id %></code></td>
+              <td><%= check.tags %></td>
+              <td><%= check.nodes.length %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </details>
+
+      <h2>Inapplicable checks</h2>
+      <details>
+        <summary>
+          Axe found <b><%= inapplicable.length %></b> inapplicable <%=
+          plural(inapplicable.length, 'check') %>.
+        </summary>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Rule</th>
+              <th>Tags</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% for(const check of inapplicable) { %>
+            <tr>
+              <td><%= check.description %></td>
+              <td><code><%= check.id %></code></td>
+              <td><%= check.tags %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </details>
+    </main>
+  </body>
+</html>

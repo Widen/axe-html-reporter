@@ -1,7 +1,7 @@
 import { Result } from 'axe-core'
 import { PreparedResults } from '../hi'
 import { AxeReport, FixSummary, Summary } from './AxeReport'
-import { getWcagReference } from './getWcagReference'
+import { getWcagReference } from './tags'
 
 function simplifyAxeResultForSummary(results: Result[]): Summary[] {
   return results.map(

@@ -1,6 +1,6 @@
 import { test as base } from '@playwright/test'
-import fs from 'fs/promises'
 import { AxePlugin } from 'axe-core'
+import fs from 'fs/promises'
 import createHTMLReport from '../../src'
 
 declare global {
@@ -10,7 +10,7 @@ declare global {
 }
 
 export const test = base.extend<
-  { run: () => Promise<string> },
+  { run: (content: string) => Promise<Buffer> },
   { axe: string }
 >({
   axe: [
@@ -22,12 +22,26 @@ export const test = base.extend<
     },
     { scope: 'worker' },
   ],
-  run: async ({ axe, page }, use) => {
+  run: async ({ axe, page }, use, testInfo) => {
+    // Will be moved to the global config after v1.19
+    // https://github.com/microsoft/playwright/pull/11132
+    testInfo.snapshotSuffix = ''
+
+    // Inject Axe into the page
     await page.evaluate((axe) => window.eval(axe), axe)
 
-    await use(async () => {
+    await use(async (content) => {
+      // Set the content of the page to the provided HTML, then run the Axe checks
+      await page.setContent(content)
       const results = await page.evaluate(() => window.axe.run())
-      return createHTMLReport(results)
+      const html = await createHTMLReport(results)
+
+      // TEMP
+      await fs.writeFile('report.html', html)
+
+      // Update the page content to the HTML report and take a screenshot
+      await page.setContent(html)
+      return page.screenshot()
     })
   },
 })
