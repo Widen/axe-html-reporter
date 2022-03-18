@@ -5,13 +5,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: ${{ github.repository == 'Widen/i18next-print-keys' }}
+    if: ${{ github.repository == 'Widen/axe-reporter-html' }}
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 16.x
-      - run: yarn install --immutable
+      - uses: mskelton/setup-yarn@v1
       - run: yarn prettier --write .
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4

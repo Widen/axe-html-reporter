@@ -1,68 +1,49 @@
 {
-    "name": "axe-reporter-html",
-    "version": "0.0.1",
-    "description": "The module that allows you to create HTML Report from raw accessibility aXe result object",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/lpelypenko/axe-html-reporter"
-    },
-    "engines": {
-        "node": ">=8.9.0"
-    },
-    "keywords": [
-        "axe",
-        "report",
-        "test",
-        "accessibility"
-    ],
-    "author": "Liliia Pelypenko (liliia.pelypenko@gmail.com)",
-    "license": "MIT",
-    "files": [
-        "dist",
-        "src",
-        "test",
-        "types"
-    ],
-    "bugs": {
-        "url": "https://github.com/lpelypenko/axe-html-reporter/issues"
-    },
-    "homepage": "https://github.com/lpelypenko/axe-html-reporter",
-    "scripts": {
-        "prebuild": "rimraf dist build",
-        "copy": "cp -R ./src/util/template ./dist/util/template",
-        "build": "tsc --project tsconfig.build.json && npm run copy",
-        "test": "jest test",
-        "test:watch": "jest test --watch"
-    },
-    "publishConfig": {
-        "access": "public",
-        "registry": "https://registry.npmjs.org"
-    },
-    "peerDependencies": {
-        "axe-core": ">=3"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.17.7",
-        "@babel/eslint-parser": "^7.17.0",
-        "@types/jest": "^25.2.3",
-        "@types/mustache": "^4.0.1",
-        "@types/node": "^14.11.8",
-        "@typescript-eslint/eslint-plugin": "^5.15.0",
-        "@typescript-eslint/parser": "^5.15.0",
-        "eslint": "^8.11.0",
-        "eslint-config-widen": "^0.5.0",
-        "eslint-plugin-sort": "^2.4.0",
-        "eslint-plugin-widen": "^0.1.1",
-        "jest": "^26.5.3",
-        "prettier": "^2.1.2",
-        "ts-jest": "^26.4.1",
-        "typescript": "^4.0.3"
-    },
-    "dependencies": {
-        "mustache": "^4.0.1",
-        "rimraf": "^3.0.2"
-    },
-    "packageManager": "yarn@3.2.0"
+  "name": "axe-reporter-html",
+  "version": "0.0.1",
+  "description": "Axe reporter that creates an HTML report listing violations, passes, incomplete and incompatible results.",
+  "author": "Widen",
+  "license": "ISC",
+  "packageManager": "yarn@3.2.0",
+  "repository": "github:Widen/axe-reporter-html",
+  "homepage": "https://github.com/Widen/axe-reporter-html#readme",
+  "bugs": {
+    "url": "https://github.com/Widen/axe-reporter-html/issues"
+  },
+  "keywords": [
+    "axe",
+    "axe-core",
+    "axe-reporter"
+  ],
+  "engines": {
+    "node": ">=14"
+  },
+  "type": "module",
+  "exports": "./lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "src",
+    "lib"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "test": "playwright test",
+    "ts": "tsc",
+    "format": "prettier --write .",
+    "release": "yarn tsc && yarn changeset publish"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.7",
+    "@babel/eslint-parser": "^7.17.0",
+    "@changesets/cli": "^2.21.1",
+    "@playwright/test": "^1.20.0",
+    "@typescript-eslint/eslint-plugin": "^5.15.0",
+    "@typescript-eslint/parser": "^5.15.0",
+    "eslint": "^8.11.0",
+    "eslint-config-widen": "^0.5.0",
+    "eslint-plugin-sort": "^2.4.0",
+    "eslint-plugin-widen": "^0.1.1",
+    "prettier": "^2.6.0",
+    "typescript": "^4.6.2"
+  }
 }
