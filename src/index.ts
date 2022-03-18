@@ -1,3 +1,5 @@
-import { reporter } from './reporter'
+import { AxeResults } from 'axe-core'
 
-export default reporter
+export default function createHTMLReport(results: AxeResults[]) {
+  return ''
+}

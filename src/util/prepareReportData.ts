@@ -1,19 +1,19 @@
+import { Result } from 'axe-core'
+import { PreparedResults } from '../hi'
 import { AxeReport, FixSummary, Summary } from './AxeReport'
 import { getWcagReference } from './getWcagReference'
-import { PreparedResults } from '../index'
-import { Result } from 'axe-core'
 
 function simplifyAxeResultForSummary(results: Result[]): Summary[] {
   return results.map(
-    ({ nodes, description, help, id, tags, impact }, resultIndex) => ({
-      index: resultIndex + 1,
+    ({ description, help, id, impact, nodes, tags }, resultIndex) => ({
       description,
-      id,
       help,
-      wcag: getWcagReference(tags),
-      tags,
+      id,
       impact: impact || 'n/a',
+      index: resultIndex + 1,
       nodes: nodes.length,
+      tags,
+      wcag: getWcagReference(tags),
     })
   )
 }
@@ -42,10 +42,10 @@ function prepareFixSummary(
  * - detailed list of violations that could be printed as formatted text
  */
 export function prepareReportData({
-  violations,
-  passes,
-  incomplete,
   inapplicable,
+  incomplete,
+  passes,
+  violations,
 }: PreparedResults): AxeReport {
   const passedChecks = passes ? simplifyAxeResultForSummary(passes) : undefined
   const incompleteChecks = incomplete
@@ -60,11 +60,11 @@ export function prepareReportData({
   }, 0)
   if (violations.length === 0) {
     return {
+      checksInapplicable: inapplicableChecks,
+      checksIncomplete: incompleteChecks,
+      checksPassed: passedChecks,
       violationsSummary:
         'axe-core found <span class="badge badge-success">0</span> violations',
-      checksPassed: passedChecks,
-      checksIncomplete: incompleteChecks,
-      checksInapplicable: inapplicableChecks,
     }
   }
   const violationsSummary = `axe-core found <span class="badge badge-warning">${violationsTotal}</span> violation${
@@ -74,17 +74,15 @@ export function prepareReportData({
   const violationsSummaryTable = simplifyAxeResultForSummary(violations)
   // Prepare data to show detailed list of violations
   const violationsDetails = violations.map(
-    ({ nodes, impact, description, help, id, tags, helpUrl }, issueIndex) => {
+    ({ description, help, helpUrl, id, impact, nodes, tags }, issueIndex) => {
       return {
-        index: issueIndex + 1,
-        wcag: getWcagReference(tags),
-        tags,
-        id,
-        impact: impact || 'n/a',
         description,
         help,
         helpUrl,
-        nodes: nodes.map(({ target, html, failureSummary, any }, nodeIndex) => {
+        id,
+        impact: impact || 'n/a',
+        index: issueIndex + 1,
+        nodes: nodes.map(({ any, failureSummary, html, target }, nodeIndex) => {
           const targetNodes = target.join('\n')
           const defaultHighlight = {
             highlight:
@@ -108,23 +106,25 @@ export function prepareReportData({
           })
 
           return {
-            targetNodes,
-            html,
             fixSummaries,
-            relatedNodesAny,
+            html,
             index: nodeIndex + 1,
+            relatedNodesAny,
+            targetNodes,
           }
         }),
+        tags,
+        wcag: getWcagReference(tags),
       }
     }
   )
 
   return {
+    checksInapplicable: inapplicableChecks,
+    checksIncomplete: incompleteChecks,
+    checksPassed: passedChecks,
+    violationsDetails,
     violationsSummary,
     violationsSummaryTable,
-    violationsDetails,
-    checksPassed: passedChecks,
-    checksIncomplete: incompleteChecks,
-    checksInapplicable: inapplicableChecks,
   }
 }

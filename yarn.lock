@@ -1095,7 +1095,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^17.0.21":
   version: 17.0.21
   resolution: "@types/node@npm:17.0.21"
   checksum: 89dcd2fe82f21d3634266f8384e9c865cf8af49685639fbdbd799bdd1040480fb1e8eeda2d3b9fce41edbe704d2a4be9f427118c4ae872e8d9bb7cbeb3c41a94
@@ -1414,12 +1414,14 @@ __metadata:
     "@changesets/cli": ^2.21.1
     "@playwright/test": ^1.20.0
     "@types/ejs": ^3.1.0
+    "@types/node": ^17.0.21
     "@typescript-eslint/eslint-plugin": ^5.15.0
     "@typescript-eslint/parser": ^5.15.0
     axe-core: ^4.4.1
     ejs: ^3.1.6
     eslint: ^8.11.0
     eslint-config-widen: ^0.5.0
+    eslint-plugin-playwright: ^0.8.0
     eslint-plugin-sort: ^2.4.0
     eslint-plugin-widen: ^0.1.1
     prettier: ^2.6.0
@@ -1950,6 +1952,19 @@ __metadata:
     eslint-plugin-react-hooks:
       optional: true
   checksum: 66b1d4d518b77f20e70c82ba6137314bb68a2ca9743b425abe462b078320b571ef0ea222b42e1ce685bce5b91ddbb76707c00f30dca34ddf5dc2da9e53a066f7
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-playwright@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "eslint-plugin-playwright@npm:0.8.0"
+  peerDependencies:
+    eslint: ">=7"
+    eslint-plugin-jest: ">=24"
+  peerDependenciesMeta:
+    eslint-plugin-jest:
+      optional: true
+  checksum: 438bda1611dcee8388c2ea0c5d1871fb5cba9b84ee9b21aacb5e23d75f4c88acda1feb0c03eee9a9fa181a062e9350dd77a325517edab05d4a07029fccaa09b9
   languageName: node
   linkType: hard
 

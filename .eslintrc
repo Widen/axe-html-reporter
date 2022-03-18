@@ -1,3 +1,9 @@
 {
-  "extends": ["widen", "widen/typescript"]
+  "extends": ["widen", "widen/typescript"],
+  "overrides": [
+    {
+      "files": ["test/**/*"],
+      "extends": "plugin:playwright/playwright-test"
+    }
+  ]
 }
