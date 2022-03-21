@@ -21,10 +21,15 @@ jobs:
       - uses: mskelton/setup-yarn@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: yarn lint
-      - run: yarn prettier --check .
-      - run: yarn tsc --noEmit
+      - name: Install Playwright
+        run: yarn playwright install chromium --with-deps
       - run: yarn test
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: test-results
   release:
     needs: [lint, ts, test]
     runs-on: ubuntu-latest
