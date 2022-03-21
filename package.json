@@ -22,7 +22,8 @@
   "types": "lib/index.d.ts",
   "files": [
     "src",
-    "lib"
+    "lib",
+    "template.ejs"
   ],
   "scripts": {
     "lint": "eslint .",
