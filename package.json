@@ -29,7 +29,7 @@
     "test": "playwright test",
     "ts": "tsc",
     "format": "prettier --write .",
-    "release": "yarn tsc && yarn changeset publish"
+    "release": "yarn tsc -p tsconfig.build.json && yarn changeset publish"
   },
   "devDependencies": {
     "@babel/core": "^7.17.7",
