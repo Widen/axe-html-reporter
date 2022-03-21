@@ -22,4 +22,10 @@ yarn add axe-reporter-html
 
 ## Usage
 
-TODO
+This package exports a single function that you can use to create an HTML report from an `AxeResults` object.
+
+```js
+import createHTMLReport from 'axe-reporter-html'
+
+const html = await createHTMLReport(results)
+```
