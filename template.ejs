@@ -32,10 +32,12 @@
 
       .node-list {
         display: flex;
+        flex-direction: column;
         gap: 8px;
       }
 
       .node-list pre {
+        margin: 0;
         width: 100%;
       }
 
@@ -96,7 +98,7 @@
             <li>Tags: <%= check.tags %></li>
           </ul>
 
-          <p style="margin: 0">
+          <p style="margin-bottom: 8px">
             <b><%= check.nodes.length %></b> <%= plural(check.nodes.length,
             'node') %> triggered this violation.
           </p>
