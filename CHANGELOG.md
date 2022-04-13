@@ -1,5 +1,11 @@
 # axe-reporter-html
 
+## 0.1.2
+
+### Patch Changes
+
+- 1b711c9: Fix multiple nodes not displaying properly
+
 ## 0.1.1
 
 ### Patch Changes
