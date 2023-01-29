@@ -7,5 +7,5 @@
 
 .vscode/
 node_modules/
-lib/
+dist/
 test-results/
