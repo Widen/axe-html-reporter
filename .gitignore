@@ -1,11 +1,10 @@
 # Yarn
+node_modules/
 .yarn/*
 !.yarn/releases
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
 
-.vscode/
-node_modules/
 dist/
 test-results/
