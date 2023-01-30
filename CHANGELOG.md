@@ -1,5 +1,11 @@
 # axe-reporter-html
 
+## 1.0.0
+
+### Major Changes
+
+- f7089e7: Update to ESM-first. CommonJS is still supported.
+
 ## 0.1.2
 
 ### Patch Changes
