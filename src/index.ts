@@ -1,8 +1,7 @@
 import { AxeResults } from 'axe-core'
 import ejs from 'ejs'
-import fs from 'fs/promises'
-import path from 'path'
-import { getWCAGTags, icons, plural } from './utils'
+import fs from 'node:fs/promises'
+import { getWCAGTags, icons, plural } from './utils.js'
 
 function prepareResults({ inapplicable, passes, violations }: AxeResults) {
   return {
@@ -25,8 +24,8 @@ function prepareResults({ inapplicable, passes, violations }: AxeResults) {
 }
 
 export default async function createHTMLReport(results: AxeResults) {
-  const templatePath = path.join(__dirname, '../template.ejs')
-  const template = await fs.readFile(templatePath, 'utf8')
+  const templateURL = new URL('../template.ejs', import.meta.url)
+  const template = await fs.readFile(templateURL, 'utf8')
 
   return ejs.render(template, prepareResults(results))
 }

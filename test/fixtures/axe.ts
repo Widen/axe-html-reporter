@@ -1,7 +1,10 @@
 import { test as base } from '@playwright/test'
 import { AxePlugin } from 'axe-core'
-import fs from 'fs/promises'
-import createHTMLReport from '../../src'
+import fs from 'node:fs/promises'
+import { createRequire } from 'node:module'
+import createHTMLReport from '../../src/index.js'
+
+const require = createRequire(import.meta.url)
 
 declare global {
   interface Window {

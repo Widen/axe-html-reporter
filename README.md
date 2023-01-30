@@ -4,27 +4,29 @@
 [![npm version](https://img.shields.io/npm/v/axe-reporter-html)](https://www.npmjs.com/package/axe-reporter-html)
 [![changesets](https://img.shields.io/badge/maintained%20with-changesets-blue)](https://github.com/atlassian/changesets)
 
-Creates an HTML report from Axe results listing violations, passes, incomplete and incompatible results.
+Creates an HTML report from Axe results listing violations, passes, incomplete
+and incompatible results.
 
 ## Installation
 
 ### npm
 
-```sh
+```bash
 npm install axe-reporter-html
 ```
 
 ### Yarn
 
-```sh
+```bash
 yarn add axe-reporter-html
 ```
 
 ## Usage
 
-This package exports a single function that you can use to create an HTML report from an `AxeResults` object.
+This package exports a single function that you can use to create an HTML report
+from an `AxeResults` object.
 
-```js
+```javascript
 import createHTMLReport from 'axe-reporter-html'
 
 const html = await createHTMLReport(results)

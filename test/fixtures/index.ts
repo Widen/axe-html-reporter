@@ -1,2 +1,2 @@
 export { expect } from '@playwright/test'
-export { test } from './axe'
+export { test } from './axe.js'

@@ -28,7 +28,7 @@ package.json files.
 When making a change that requires a release, run the `yarn changeset` command
 and follow the prompts to specify the semver bump and the change notes.
 
-```sh
+```bash
 yarn changeset
 ```
 
