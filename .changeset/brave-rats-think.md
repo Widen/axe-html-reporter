@@ -1,5 +1,5 @@
 ---
-"axe-reporter-html": minor
+'axe-reporter-html': minor
 ---
 
 Update dependencies
