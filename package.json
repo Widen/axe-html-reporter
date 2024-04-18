@@ -1,6 +1,6 @@
 {
   "name": "axe-reporter-html",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Creates an HTML report from Axe results listing violations, passes, incomplete and incompatible results.",
   "author": "Widen",
   "license": "ISC",
