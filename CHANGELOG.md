@@ -1,5 +1,11 @@
 # axe-reporter-html
 
+## 1.1.0
+
+### Minor Changes
+
+- ba16bcf: Update dependencies
+
 ## 1.0.0
 
 ### Major Changes
